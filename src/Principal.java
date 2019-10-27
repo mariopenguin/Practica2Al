@@ -9,9 +9,7 @@ public class Principal {
         solucion.setNumMovimientos(Integer.MAX_VALUE);
         if (cadena1.length()>cadena2.length()){
             algoritmoaux1(cadena1,cadena2, 0, 0, new Booleano(false),solucion,new Entero(cadena1.length()));
-        }/*else if(cadena2.length()>30){
-            algoritmoaux1(cadena1,cadena2, 0, 0, new Booleano(false),solucion,new Entero(16));
-        }*/
+        }
         else{
             algoritmoaux1(cadena1,cadena2, 0, 0, new Booleano(false),solucion,new Entero(cadena2.length()));
         }
@@ -60,7 +58,7 @@ public class Principal {
         StringBuilder resultado = new StringBuilder(cadena1);
         if (operador == 0) {
             resultado.setCharAt(posicion, cadena2.charAt(posicion));
-        } else if (operador == 1 && cadena1.length()<cadena2.length()) {
+        } else if (operador == 1 ) {
             if(posicion>cadena1.length()){
                 resultado.append(cadena2.charAt(posicion));
             }else{
@@ -82,9 +80,9 @@ public class Principal {
     private static boolean aceptable(int operador, String cadena, String cadena2, int posicion) {
         if (operador == 0 && cadena.length() > posicion && cadena2.length() > posicion && cadena.charAt(posicion)!= cadena2.charAt(posicion)) {
             return true;
-        } else if (operador == 1 && cadena.length() < cadena2.length() && cadena2.length() > posicion) {
+        } else if (operador == 1  && cadena2.length() > posicion ) {
             return true;
-        } else if (operador == 2 && cadena.length() > posicion && cadena.length()>cadena2.length()) {
+        } else if (operador == 2 && cadena.length() > posicion) {
             return true;
         }else if(operador==3 && cadena.length()>posicion && cadena2.length()>posicion && cadena.charAt(posicion)==cadena2.charAt(posicion)){
             return true;
@@ -129,10 +127,6 @@ public class Principal {
             while (operacion <= 3);
     }
 */
-    /*public static void main(String[] args) {
-        System.out.println(numMinMutaciones("ATCGATCGGGGGCCCCTTTTTTTAAAA"
-                                           ,"ATCGATCGATCGATAGCTAGATCGGGGGCCCCTTTTTTTAAAA"));
-        System.out.println(numMinMutaciones("AAAGGGGTTTTCGCTAGTCGATCGATCGATCGATAGCTAGATCGGGGGCCCCTTTTTTTAAAA","AGGTGGTTTTCGCTGGAGTCGACGATCGATAGCTAAGATCGGGGGCCCCCTATTTTTTAA"));
-    }*/
+
 }
 
