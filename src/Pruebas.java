@@ -35,6 +35,8 @@ public class Pruebas {
     private static int[] resultados = { 1, 3, 7, 6, 7, 1, 1, 4, 0, 13, 16, 11, 5};
 
 
+
+
     private static void test() {
         boolean exito = true;
         System.out.println("TESTS");
@@ -46,9 +48,11 @@ public class Pruebas {
             System.out.print("PRUEBA " + (i+1) + ". Ejecutando.....");
 
 
-            long t1 = System.nanoTime();
-            int dist = Principal.numMinMutaciones(str1[i], str2[i]);
-            long t2 = System.nanoTime();
+                long t1 = System.nanoTime();
+                int dist = Principal.numMinMutaciones(str1[i], str2[i]);
+                long t2 = System.nanoTime();
+
+
 
             if ((t2-t1)/1E6 < 1E3)
                 System.out.println("   La ejecución ha tardado: "  + (t2-t1)/1E6 + " [ms] ");
