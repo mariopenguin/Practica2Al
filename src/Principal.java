@@ -5,9 +5,9 @@ public class Principal {
     public static int numMinMutaciones(String cadena1, String cadena2) {
         if (cadena1.length()>cadena2.length()){
             algoritmoAux1(cadena1,cadena2, 0, 0, false,solucion,cadena1.length());
-        }/*else if(cadena2.length()>30){
+        }else if(cadena2.length()>30){
             algoritmoAux1(cadena1,cadena2, 0, 0, false,solucion,16);
-        }*/
+        }
         else{
             algoritmoAux1(cadena1,cadena2, 0, 0, false,solucion,cadena2.length());
         }
@@ -33,9 +33,9 @@ public class Principal {
                 solucion.incrementarAvanzar();
                 posicion++;
             }
-            return cadena1;
+
         }else{
-            return cadena1;
+
         }
         return resultado.toString();
     }
