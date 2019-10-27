@@ -6,19 +6,53 @@ public class Principal {
     * que puede realizar y una clase auxiliar solucion.
     *  */
     public static int numMinMutaciones(String cadena1, String cadena2) {
+        solucion.setNumMovimientos(Integer.MAX_VALUE);
         if (cadena1.length()>cadena2.length()){
-            backtracking(cadena1,cadena2, 0, 0, false,solucion,cadena1.length());
-        }else if(cadena2.length()>30){
-            backtracking(cadena1,cadena2, 0, 0, false,solucion,16);
-        }
+            algoritmoaux1(cadena1,cadena2, 0, 0, new Booleano(false),solucion,new Entero(cadena1.length()));
+        }/*else if(cadena2.length()>30){
+            algoritmoaux1(cadena1,cadena2, 0, 0, new Booleano(false),solucion,new Entero(16));
+        }*/
         else{
-            backtracking(cadena1,cadena2, 0, 0, false,solucion,cadena2.length());
+            algoritmoaux1(cadena1,cadena2, 0, 0, new Booleano(false),solucion,new Entero(cadena2.length()));
         }
         int aux = solucion.getNumMovimientos();
         solucion = new Solucion();
         return aux;
     }
-    
+
+    private static void algoritmoaux1(String s1, String s2, int posicion, int numMovimientos, Booleano exito, Solucion solucion, Entero maxMov) {
+        String aux = "";
+        int operacion = 0;
+        do {
+            if (s1.length()==s2.length()&& posicion== s2.length() && s1.charAt(posicion-1)==s2.charAt(posicion-1)){
+                exito.setExito(true);
+                if (solucion.isInicializado() && numMovimientos<solucion.getNumMovimientos()){
+                    solucion.setNumMovimientos(numMovimientos);
+                }
+                else if(!solucion.isInicializado()){
+                    solucion.setNumMovimientos(numMovimientos);
+                    solucion.setInicializado(true);
+                }
+            }
+            else if (aceptable(operacion, s1, s2, posicion) && numMovimientos <= solucion.getNumMovimientos() && numMovimientos<=maxMov.getEntero()) {
+                aux= operar(operacion,s1,s2,posicion);
+                numMovimientos = numMovimientos+1;
+                if (operacion==1 || operacion ==2){
+                    algoritmoaux1(aux,s2,posicion,numMovimientos,exito,solucion,maxMov);//Desanotar
+                }else if(operacion == 0){
+                    algoritmoaux1(aux,s2,posicion+1,numMovimientos,exito,solucion,maxMov);//Desanotar
+                }
+                else{
+                    numMovimientos = numMovimientos-1;
+                    int aux1 = solucion.getAvanzar();
+                    solucion.resetearAvanzar();
+                    algoritmoaux1(aux,s2,posicion+aux1,numMovimientos,exito,solucion,maxMov);//Desanotar
+                }
+                if (operacion!=3) numMovimientos--;
+            }operacion++;
+        }
+        while (operacion <= 3);
+    }
     /*Este metodo se encarga de realizar las operaciones sobre la string destino en funcion del codigo de operacion y la posicion sobre la que se desea
     * realizar dicho cambio */
  
@@ -61,7 +95,7 @@ public class Principal {
     }
 
     /*Algoritmo de backtracking principal */
-    private static void backtracking(String s1, String s2, int posicion, int numMovimientos, boolean exito, Solucion solucion, int maxMov) {
+   /* private static void algoritmoaux1(String s1, String s2, int posicion, int numMovimientos, boolean exito, Solucion solucion, int maxMov) {
         String aux = "";
         int operacion = 0;
         do {
@@ -79,22 +113,22 @@ public class Principal {
                 aux= operar(operacion,s1,s2,posicion);
                 numMovimientos = numMovimientos+1;
                 if (operacion==1 || operacion ==2){
-                    backtracking(aux,s2,posicion,numMovimientos,exito,solucion,maxMov);//Desanotar
+                    algoritmoaux1(aux,s2,posicion,numMovimientos,exito,solucion,maxMov);//Desanotar
                 }else if(operacion == 0){
-                    backtracking(aux,s2,posicion+1,numMovimientos,exito,solucion,maxMov);//Desanotar
+                    algoritmoaux1(aux,s2,posicion+1,numMovimientos,exito,solucion,maxMov);//Desanotar
                 }
                 else{
                     numMovimientos = numMovimientos-1;
                     int aux1 = solucion.getAvanzar();
                     solucion.resetearAvanzar();
-                    backtracking(aux,s2,posicion+aux1,numMovimientos,exito,solucion,maxMov);//Desanotar
+                    algoritmoaux1(aux,s2,posicion+aux1,numMovimientos,exito,solucion,maxMov);//Desanotar
                 }
                 if (operacion!=3) numMovimientos--;
             }operacion++;
         }
             while (operacion <= 3);
     }
-
+*/
     /*public static void main(String[] args) {
         System.out.println(numMinMutaciones("ATCGATCGGGGGCCCCTTTTTTTAAAA"
                                            ,"ATCGATCGATCGATAGCTAGATCGGGGGCCCCTTTTTTTAAAA"));
